@@ -1,0 +1,140 @@
+/* Square Numbers and Number Squares
+Imagine a square, two dimensional array of integers. Write a program that calculates the sum of the
+squares on the diagonals, making sure to consider the center square, if there is one, twice.
+Your program should take a list of integers between 100 and 999 as input. When a valid number of
+integers is provided, the program should output the ”square”. Considered numbers should be highlighted
+as shown. Output the result of the sum operation, as well as the calculation performed.
+
+Your program should throw an exception if an invalid number of integers are provided. It should be caught
+in your main method and should display a message that indicates the number of integers submitted and
+it should suggest both the first number that is smaller and yields a proper square and the first number
+that is larger and yields a proper square (e.g. 7 is wrong, so 4 or 9 would be suggested). A separate
+exception for invalid integers (too large or too small), should be thrown and caught in the same try
+block as where the previous exception is caught. No example messages are shown, so communicate the
+requested info for the first exception clearly, and communicate as useful a message as possible for the
+second exception.
+You should look at the vector library to help collect the integers from the input, but you should use a
+dynamically allocated 2D array of ints for processing the array internally. We teach you about using
+classes because it is a better way for you to program. Think about what’s going on here and how you
+might organize it into a class (what are you keeping track of, what’s the data, what’s the behaviour, how
+should it happen).  */
+//-----------------------------------------------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <cmath>
+#include<typeinfo>
+using namespace std;
+bool isPerfectSquare(long double x) 
+{
+  long double sr = sqrt(x); 
+  return ((sr - floor(sr)) == 0); 
+} 
+int main() {
+    
+try{
+  cout << "Please enter any number:";
+  int y;
+  int po;
+  cin >> po ;
+  y = sqrt(po);
+  if(! isPerfectSquare(po))
+  {
+      throw("he");
+  }
+  int x = y*y;
+  int user_in[x];
+  cout << "Please enter "<< x << " numbers :";
+for(int i =0 ; i < x;i++)
+    {
+        int u;
+        cin >> u;
+        if(u <100 or u > 999){
+            throw (u);
+        }
+        user_in[i] = u;
+    }
+    int sec = 0;
+    int dec = y-1;
+    int count = 0;
+for(int d = 0; d < y ; d++)
+{
+    cout << "+";
+for(int i = 0; i < y; i++)
+    {
+        cout << "-----+";
+    }
+    cout << "\n";
+for(int i = 0; i < y ; i++)
+    {
+        cout << "|";
+        if(i==sec or i == dec)
+            {
+                cout << ".....";
+            }
+        else{
+        cout<< "     ";}
+    }
+    cout << "|\n";
+for(int i = 0; i < y ; i++)
+    {
+        cout << "|";
+        if(i==sec or i == dec)
+            {
+                cout << "."<<user_in[count]<<".";
+            }
+        else{
+        cout<< " "<<user_in[count] <<" ";}
+        count ++;
+    }
+    cout << "|\n";
+for(int i = 0; i < y ; i++)
+    {
+        cout << "|";
+        if(i==sec or i == dec)
+            {
+                cout << ".....";
+            }
+        else{
+        cout<< "     ";}
+    }
+    cout << "|\n";
+    sec +=1;
+    dec -=1;
+}
+ cout << "+";
+for(int i = 0; i < y; i++)
+    {
+        cout << "-----+";
+    }
+int sum =0;
+int mec = 0;
+int nec= y-1;
+int dount = 0;
+for(int d = 0; d < y ; d++)
+{
+for(int i = 0; i < y ; i++)
+    {
+        if(i==nec or i == mec)
+            {
+                if (nec==mec)
+                    {
+                        sum = sum + user_in[dount];
+                    }
+                sum = sum + user_in[dount];
+            }
+        dount ++;
+    }
+mec ++;
+nec --;
+}
+cout << "\nSum = " <<sum; 
+mec =0;
+nec =y-1;
+}
+catch(int k)
+{
+    cout << "The one of the entered number/s is not three digit!";
+}
+catch(const char*  h){
+    cout<<"Please enter number whose square root is an integer like 4 or 9!";
+}
+}
